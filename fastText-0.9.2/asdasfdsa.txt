@@ -1,0 +1,14 @@
+cat train.txt | sed -e "s/\([.\!?,'/()]\)/ \1 /g" | tr "[:upper:]" "[:lower:]" > train.preprocessed.txt
+
+
+
+./fasttext supervised -input preprocessed_train.txt -output model_news -epoch 5 -lr
+
+
+./fasttext test model_news.bin preprocessed_test.txt
+
+./fasttext supervised -input preprocessed_train.txt -output model_news -epoch 10 -lr 1.0 -wordNgrams 2 -loss one-vs-all
+
+
+git remote add origin https://github.com/furkantosun61/fasttextmain.git
+git 
